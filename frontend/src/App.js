@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/header'
+import Api from "./containers/api"
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Dashboard from "./components/dashboard"
 
 function App() {
+  const sections = ["finances"]
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="wrapper">
+      <Header
+        menuItems={sections} />
+      <div id="contents">
+        <Api>
+          <Router>
+            <Switch>
+              <Route
+                exact path="/" render={sections => <Dashboard sections={sections} />}></Route>
+            </Switch>
+          </Router>
+        </Api>
+      </div>
+    </div >
   );
 }
 
